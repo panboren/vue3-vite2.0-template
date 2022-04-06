@@ -3,11 +3,17 @@ const routes = [
   {
     path: "/",
     name: "root",
-    redirect: "/page1",
-  }
+    redirect: "/home",
+  },
+/*  {
+    path: '/home',
+    name: 'home',
+    component: () =>
+        import(/!* webpackChunkName: "home" *!/ '../views/home/index')
+  }*/
 ];
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 });
 /* 批量引入 */
@@ -17,7 +23,6 @@ Object.keys(modules).forEach(key => {
   if(!nameMatch) return
   const indexMatch = nameMatch[1].match(/(.*)\/index$/i)
   let name = indexMatch ? indexMatch[1] : nameMatch[1];
-  debugger
   [name] = name.split('/').splice(-1)
   router.addRoute(name,{
     path: `/${name}`,
