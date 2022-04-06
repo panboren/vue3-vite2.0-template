@@ -2,11 +2,23 @@
 import { computed } from 'vue'
 import {useStore} from 'vuex'
 let store=useStore()
- let name=computed(()=>store.state.page1.name)
+ let name=computed(()=>store.state.home.name)
+// import imgUrl from '../../assets/image/header/header-left-active.png?raw'
+const imgUrl = new URL('../../assets/image/header/header-left-active.png', import.meta.url)
+// console.log(147,imgUrl);
+
+function getImageUrl() {
+    return new URL(`../../assets/image/header/1.png`, import.meta.url).href
+}
+
+console.log(888);
+console.log(import.meta.env);
+console.log(import.meta.env.VITE_APP_TITLE);
 </script>
 
 <template>
   <div class="page1">
+      <img :src="imgUrl" alt="">
      <div class="main">
        {{name}}
      </div>
